@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Freelancing Journey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0f;
+      --bg2: #161618;
+      --bg3: #1e1e21;
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.14);
+      --text: #f0ede8;
+      --text2: #9b9693;
+      --text3: #5c5a57;
+      --accent: #d4a853;
+      --accent2: #b8864a;
+      --green: #4caf7d;
+      --green-bg: rgba(76,175,125,0.12);
+      --blue: #5b9cf6;
+      --blue-bg: rgba(91,156,246,0.12);
+      --red: #e06b5b;
+      --radius: 12px;
+      --radius-lg: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(14,14,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 1.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-actions { display: flex; gap: 8px; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%; transform: translateX(-50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(ellipse, rgba(212,168,83,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 0.5px solid rgba(212,168,83,0.35);
+      border-radius: 50px;
+      padding: 4px 14px;
+      margin-bottom: 1.25rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    .hero-name span { color: var(--accent); font-style: italic; }
+    .hero-tagline {
+      font-size: clamp(14px, 2vw, 16px);
+      color: var(--text2);
+      max-width: 480px;
+      margin: 0 auto 1.75rem;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+    .hero-cta {
+      animation: fadeUp 0.5s 0.3s ease both;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── STATS ── */
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2.5rem;
+    }
+    .stat-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1rem;
+      text-align: center;
+      animation: fadeUp 0.5s 0.4s ease both;
+    }
+    .stat-num {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-weight: 500;
+      color: var(--accent);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 5px;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2.5rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+
+    /* ── WHY CARD ── */
+    .why-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -10px; left: 12px;
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: rgba(212,168,83,0.07);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .why-text {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.8;
+      white-space: pre-wrap;
+      position: relative;
+    }
+    .why-placeholder {
+      font-size: 14px;
+      color: var(--text3);
+      font-style: italic;
+      line-height: 1.7;
+    }
+    .quote-strip {
+      margin-top: 12px;
+      border-top: 0.5px solid var(--border);
+      padding-top: 12px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    /* ── WEEK TRACKER ── */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .day-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .day-label {
+      font-size: 10px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .day-btn {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 10px;
+      border: 0.5px solid var(--border);
+      background: var(--bg2);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .day-btn:hover { border-color: var(--accent); background: rgba(212,168,83,0.06); }
+    .day-btn.done {
+      background: var(--green-bg);
+      border-color: rgba(76,175,125,0.4);
+    }
+    .day-btn.done svg { stroke: var(--green); }
+    .day-btn svg { width: 16px; height: 16px; stroke: var(--text3); fill: none; stroke-width: 2; }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .ach-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.1rem 0.9rem;
+      position: relative;
+      transition: border-color 0.2s;
+      animation: fadeUp 0.3s ease both;
+    }
+    .ach-card:hover { border-color: var(--border2); }
+    .ach-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      border-radius: 50px;
+      padding: 3px 10px;
+      margin-bottom: 8px;
+    }
+    .ach-type-badge.learning { background: var(--blue-bg); color: var(--blue); }
+    .ach-type-badge.client { background: rgba(212,168,83,0.12); color: var(--accent); }
+    .ach-type-badge.consistency { background: var(--green-bg); color: var(--green); }
+    .ach-type-badge.other { background: rgba(255,255,255,0.06); color: var(--text2); }
+    .ach-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; line-height: 1.4; }
+    .ach-note { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+    .ach-footer { display: flex; justify-content: space-between; align-items: center; }
+    .ach-date { font-size: 11px; color: var(--text3); }
+    .ach-del {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text3);
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+    }
+    .ach-del:hover { color: var(--red); }
+    .ach-del svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .empty-state {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border: 0.5px dashed var(--border2);
+      border-radius: var(--radius-lg);
+      color: var(--text3);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .empty-icon { font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.5; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+      border: none;
+    }
+    .btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .btn-primary { background: var(--accent); color: #0e0e0f; }
+    .btn-primary:hover { background: var(--accent2); }
+    .btn-ghost { background: transparent; color: var(--text2); border: 0.5px solid var(--border2); }
+    .btn-ghost:hover { background: var(--bg3); color: var(--text); }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+    /* ── MODAL ── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.open { display: flex; }
+    .modal {
+      background: var(--bg2);
+      border: 0.5px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      width: 100%;
+      max-width: 420px;
+      animation: scaleIn 0.2s ease;
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--bg3);
+      border: 0.5px solid var(--border2);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group select option { background: var(--bg2); }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1.5rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 0.5px;
+      background: var(--border);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 12px;
+      color: var(--text3);
+      border-top: 0.5px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      nav { padding: 0 1rem; }
+      .hero { padding: 3rem 1rem 2rem; }
+      .stats-section { padding: 0 1rem 2rem; gap: 8px; }
+      .section { padding: 0 1rem 2rem; }
+      .ach-grid { grid-template-columns: 1fr 1fr; }
+      .modal { padding: 1.25rem; }
+      .week-grid { gap: 4px; }
+      .day-label { font-size: 9px; }
+    }
+    @media (max-width: 360px) {
+      .ach-grid { grid-template-columns: 1fr; }
+      .stats-section { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" id="nav-logo">Journey<span>.</span></div>
+  <div class="nav-actions">
+    <button class="btn btn-ghost btn-sm" onclick="openModal('profile-modal')">
+      <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit
+    </button>
+    <button class="btn btn-primary btn-sm" onclick="openModal('ach-modal')">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Win
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge" id="hero-badge">Freelancing Journey</div>
+  <h1 class="hero-name" id="hero-name">My <span>Journey</span> Starts Here</h1>
+  <p class="hero-tagline" id="hero-tagline">Every expert was once a beginner. This page is proof I showed up.</p>
+  <div class="hero-cta">
+    <button class="btn btn-primary" onclick="openModal('ach-modal')">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add achievement
+    </button>
+    <button class="btn btn-ghost" onclick="openModal('profile-modal')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Set up profile
+    </button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-card">
+    <div class="stat-num" id="stat-ach">0</div>
+    <div class="stat-label">Wins</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" id="stat-streak">0</div>
+    <div class="stat-label">Streak</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" id="stat-days">0</div>
+    <div class="stat-label">This week</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHY SECTION -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-title">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Why I'm doing this
+    </div>
+  </div>
+  <div class="why-card">
+    <div id="why-content">
+      <div class="why-placeholder">Click "Edit" in the top right to write your reason. On your hardest days, come back and read this. Your own words will carry you further than any motivation video.</div>
+    </div>
+    <div class="quote-strip" id="daily-quote">"The secret of getting ahead is getting started." — Mark Twain</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WEEK TRACKER -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-title">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      This week
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="resetWeek()">Reset</button>
+  </div>
+  <div class="week-grid" id="week-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-title">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      Achievements
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="openModal('ach-modal')">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add
+    </button>
+  </div>
+  <div id="ach-container"></div>
+</section>
+
+<footer>
+  Built for consistency. One day at a time. 🌱
+</footer>
+
+<!-- PROFILE MODAL -->
+<div class="overlay" id="profile-modal" onclick="closeOnBg(event,'profile-modal')">
+  <div class="modal">
+    <h3>Your profile</h3>
+    <div class="form-group">
+      <label>Your name</label>
+      <input type="text" id="inp-name" placeholder="e.g. Ahmed" />
+    </div>
+    <div class="form-group">
+      <label>Tagline</label>
+      <input type="text" id="inp-tagline" placeholder="e.g. Learning Excel & data entry to go freelance" />
+    </div>
+    <div class="form-group">
+      <label>Why are you doing this?</label>
+      <textarea id="inp-why" placeholder="Write honestly. This is for you — read it on days you want to quit."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('profile-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveProfile()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACHIEVEMENT MODAL -->
+<div class="overlay" id="ach-modal" onclick="closeOnBg(event,'ach-modal')">
+  <div class="modal">
+    <h3>Add a win 🏆</h3>
+    <div class="form-group">
+      <label>What did you achieve?</label>
+      <input type="text" id="inp-ach-title" placeholder="e.g. Finished Excel pivot tables tutorial" />
+    </div>
+    <div class="form-group">
+      <label>How did it feel? (optional)</label>
+      <textarea id="inp-ach-note" placeholder="Write a note to yourself..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <select id="inp-ach-type">
+        <option value="learning">📚 Learning milestone</option>
+        <option value="client">💼 Client / gig win</option>
+        <option value="consistency">🔥 Consistency win</option>
+        <option value="other">⭐ Other win</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('ach-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveAch()">Add it ✓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const QUOTES = [
+    '"The secret of getting ahead is getting started." — Mark Twain',
+    '"Small daily improvements over time lead to stunning results." — Robin Sharma',
+    '"You don\'t have to be great to start, but you have to start to be great." — Zig Ziglar',
+    '"Success is the sum of small efforts, repeated day in and day out." — Robert Collier',
+    '"Every pro was once an amateur. Every expert was once a beginner." — Robin Sharma',
+    '"It always seems impossible until it\'s done." — Nelson Mandela',
+    '"Focus on progress, not perfection." — Unknown',
+    '"Discipline is choosing between what you want now and what you want most." — Abraham Lincoln',
+    '"The harder you work for something, the greater you\'ll feel when you achieve it." — Unknown',
+    '"Don\'t watch the clock; do what it does — keep going." — Sam Levenson',
+  ];
+
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  let state = {
+    name: '',
+    tagline: '',
+    why: '',
+    achievements: [],
+    weekDays: [false,false,false,false,false,false,false],
+  };
+
+  // Load from localStorage
+  try {
+    const saved = localStorage.getItem('freelance_journey_v1');
+    if (saved) state = { ...state, ...JSON.parse(saved) };
+  } catch(e) {}
+
+  function persist() {
+    try { localStorage.setItem('freelance_journey_v1', JSON.stringify(state)); } catch(e) {}
+  }
+
+  function render() {
+    // Nav
+    const navLogo = document.getElementById('nav-logo');
+    navLogo.innerHTML = (state.name ? state.name.split(' ')[0] : 'Journey') + '<span>.</span>';
+
+    // Hero
+    document.getElementById('hero-badge').textContent = state.name ? state.name + "'s Journey" : 'Freelancing Journey';
+    if (state.name) {
+      document.getElementById('hero-name').innerHTML = state.name + "'s <span>Journey</span>";
+    }
+    if (state.tagline) {
+      document.getElementById('hero-tagline').textContent = state.tagline;
+    }
+
+    // Why
+    const whyEl = document.getElementById('why-content');
+    if (state.why) {
+      whyEl.innerHTML = '<div class="why-text">' + escHtml(state.why) + '</div>';
+    } else {
+      whyEl.innerHTML = '<div class="why-placeholder">Click "Edit" in the top right to write your reason. On your hardest days, come back and read this.</div>';
+    }
+
+    // Quote
+    const q = QUOTES[Math.floor(Date.now() / 86400000) % QUOTES.length];
+    document.getElementById('daily-quote').textContent = q;
+
+    // Stats
+    const weekDone = state.weekDays.filter(Boolean).length;
+    document.getElementById('stat-ach').textContent = state.achievements.length;
+    document.getElementById('stat-streak').textContent = calcStreak();
+    document.getElementById('stat-days').textContent = weekDone;
+
+    renderWeek();
+    renderAch();
+  }
+
+  function calcStreak() {
+    return state.weekDays.filter(Boolean).length;
+  }
+
+  function renderWeek() {
+    const grid = document.getElementById('week-grid');
+    grid.innerHTML = '';
+    DAYS.forEach((day, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'day-cell';
+      const btn = document.createElement('button');
+      btn.className = 'day-btn' + (state.weekDays[i] ? ' done' : '');
+      btn.setAttribute('aria-label', day);
+      btn.innerHTML = state.weekDays[i]
+        ? '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>'
+        : '<svg viewBox="0 0 24 24" style="opacity:0.2"><polyline points="20 6 9 17 4 12"/></svg>';
+      btn.onclick = () => { state.weekDays[i] = !state.weekDays[i]; persist(); render(); };
+      const lbl = document.createElement('div');
+      lbl.className = 'day-label';
+      lbl.textContent = day;
+      cell.appendChild(btn);
+      cell.appendChild(lbl);
+      grid.appendChild(cell);
+    });
+  }
+
+  const TYPE_CONFIG = {
+    learning:    { label: '📚 Learning',   cls: 'learning' },
+    client:      { label: '💼 Client win', cls: 'client' },
+    consistency: { label: '🔥 Consistency',cls: 'consistency' },
+    other:       { label: '⭐ Win',         cls: 'other' },
+  };
+
+  function renderAch() {
+    const container = document.getElementById('ach-container');
+    if (!state.achievements.length) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-icon">🏆</div>No achievements yet.<br>Add your first one — even finishing a YouTube tutorial counts!</div>';
+      return;
+    }
+    const grid = document.createElement('div');
+    grid.className = 'ach-grid';
+    [...state.achievements].reverse().forEach((a, ri) => {
+      const realIdx = state.achievements.length - 1 - ri;
+      const cfg = TYPE_CONFIG[a.type] || TYPE_CONFIG.other;
+      const card = document.createElement('div');
+      card.className = 'ach-card';
+      card.innerHTML = `
+        <div class="ach-type-badge ${cfg.cls}">${cfg.label}</div>
+        <div class="ach-title">${escHtml(a.title)}</div>
+        ${a.note ? '<div class="ach-note">' + escHtml(a.note) + '</div>' : ''}
+        <div class="ach-footer">
+          <span class="ach-date">${a.date}</span>
+          <button class="ach-del" onclick="deleteAch(${realIdx})" aria-label="Delete">
+            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+          </button>
+        </div>`;
+      grid.appendChild(card);
+    });
+    container.innerHTML = '';
+    container.appendChild(grid);
+  }
+
+  function deleteAch(i) {
+    if (confirm('Remove this achievement?')) {
+      state.achievements.splice(i, 1);
+      persist();
+      render();
+    }
+  }
+
+  function resetWeek() {
+    if (confirm('Reset this week\'s tracker?')) {
+      state.weekDays = [false,false,false,false,false,false,false];
+      persist();
+      render();
+    }
+  }
+
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  function closeOnBg(e, id) { if (e.target.id === id) closeModal(id); }
+
+  function openProfileModal() {
+    document.getElementById('inp-name').value = state.name;
+    document.getElementById('inp-tagline').value = state.tagline;
+    document.getElementById('inp-why').value = state.why;
+    openModal('profile-modal');
+  }
+
+  // Override openModal for profile to pre-fill
+  const origOpen = window.openModal;
+  window.openModal = function(id) {
+    if (id === 'profile-modal') {
+      document.getElementById('inp-name').value = state.name;
+      document.getElementById('inp-tagline').value = state.tagline;
+      document.getElementById('inp-why').value = state.why;
+    }
+    if (id === 'ach-modal') {
+      document.getElementById('inp-ach-title').value = '';
+      document.getElementById('inp-ach-note').value = '';
+      document.getElementById('inp-ach-type').value = 'learning';
+    }
+    document.getElementById(id).classList.add('open');
+  };
+
+  function saveProfile() {
+    const n = document.getElementById('inp-name').value.trim();
+    const t = document.getElementById('inp-tagline').value.trim();
+    const w = document.getElementById('inp-why').value.trim();
+    if (n) state.name = n;
+    if (t) state.tagline = t;
+    state.why = w;
+    persist();
+    closeModal('profile-modal');
+    render();
+  }
+
+  function saveAch() {
+    const title = document.getElementById('inp-ach-title').value.trim();
+    if (!title) { document.getElementById('inp-ach-title').focus(); return; }
+    const note = document.getElementById('inp-ach-note').value.trim();
+    const type = document.getElementById('inp-ach-type').value;
+    const date = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+    state.achievements.push({ title, note, type, date });
+    persist();
+    closeModal('ach-modal');
+    render();
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  // Keyboard ESC closes modals
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.overlay.open').forEach(m => m.classList.remove('open'));
+    }
+  });
+
+  render();
+</script>
+</body>
+</html>
